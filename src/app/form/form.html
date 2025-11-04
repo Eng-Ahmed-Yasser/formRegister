@@ -1,0 +1,93 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h3 class="text-center mb-4 text-secondary fw-bold">Form Registration</h3>
+
+          <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text" name="firstName" class="form-control"
+                       [(ngModel)]="user.firstName" #firstName="ngModel"
+                       required minlength="3"
+                       [ngClass]="{'is-invalid': (firstName.invalid && (firstName.touched || submitted))}">
+                <div class="invalid-feedback">
+                  <span *ngIf="firstName.errors?.['required']">First name is required.</span>
+                  <span *ngIf="firstName.errors?.['minlength']">At least 3 characters.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" name="lastName" class="form-control"
+                       [(ngModel)]="user.lastName" #lastName="ngModel"
+                       required minlength="3"
+                       [ngClass]="{'is-invalid': (lastName.invalid && (lastName.touched || submitted))}">
+                <div class="invalid-feedback">
+                  <span *ngIf="lastName.errors?.['required']">Last name is required.</span>
+                  <span *ngIf="lastName.errors?.['minlength']">At least 3 characters.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" name="email" class="form-control"
+                     [(ngModel)]="user.email" #email="ngModel"
+                     required email
+                     [ngClass]="{'is-invalid': (email.invalid && (email.touched || submitted))}">
+              <div class="invalid-feedback">
+                <span *ngIf="email.errors?.['required']">Email is required.</span>
+                <span *ngIf="email.errors?.['email']">Enter a valid email.</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" name="password" class="form-control"
+                     [(ngModel)]="user.password" #password="ngModel"
+                     required minlength="6"
+                     [ngClass]="{'is-invalid': (password.invalid && (password.touched || submitted))}">
+              <div class="invalid-feedback">
+                <span *ngIf="password.errors?.['required']">Password is required.</span>
+                <span *ngIf="password.errors?.['minlength']">Minimum 6 characters.</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" name="phone" class="form-control"
+                     [(ngModel)]="user.phone" #phone="ngModel"
+                     required pattern="^[0-9]{10,15}$"
+                     [ngClass]="{'is-invalid': (phone.invalid && (phone.touched || submitted))}">
+              <div class="invalid-feedback">
+                <span *ngIf="phone.errors?.['required']">Phone number is required.</span>
+                <span *ngIf="phone.errors?.['pattern']">Only digits (10–15).</span>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Age</label>
+              <input type="number" name="age" class="form-control"
+                     [(ngModel)]="user.age" #age="ngModel"
+                     required min="1" max="120"
+                     [ngClass]="{'is-invalid': (age.invalid && (age.touched || submitted))}">
+              <div class="invalid-feedback">
+                <span *ngIf="age.errors?.['required']">Age is required.</span>
+                <span *ngIf="age.errors?.['min'] || age.errors?.['max']">Enter age between 1–120.</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold" [disabled]="f.invalid">
+              Submit
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
